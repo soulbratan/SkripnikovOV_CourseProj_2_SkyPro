@@ -11,15 +11,15 @@ class VacancyStorage(ABC):
 
     @abstractmethod
     def add_vacancy(self, vacancy: Vacancy) -> None:
-        pass
+        pass    # pragma: no cover
 
     @abstractmethod
     def get_vacancies(self) -> list:
-        pass
+        pass    # pragma: no cover
 
     @abstractmethod
     def delete_vacancy(self, vacancy: Vacancy) -> None:
-        pass
+        pass    # pragma: no cover
 
 
 class JSONSaver(VacancyStorage):

@@ -9,7 +9,7 @@ def user_interaction() -> None:
     search_query = input("Введите поисковый запрос: ")
     hh_api = HeadHunterAPI()
     hh_vacancies = hh_api.get_vacancies(search_query)
-    json_saver = JSONSaver()
+    json_saver = JSONSaver("data/vacancies.json")
     json_saver.safe_from_api(hh_vacancies)
 
     data_from_file = json_saver.get_vacancies()
