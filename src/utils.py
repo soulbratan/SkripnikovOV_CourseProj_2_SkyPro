@@ -39,12 +39,12 @@ def salary_range(list_vac: list[dict]) -> list[dict]:
         salary_from = int(input("Введите минимальную зарплату: ").replace(" ", ""))
     except ValueError:
         salary_from = 0
-        print(f"Некорректно введено число. Минимальная зарплата: 0")
+        print("Некорректно введено число. Минимальная зарплата: 0")
     try:
         salary_to = int(input("Введите максимальную зарплату: ").replace(" ", ""))
     except ValueError:
         salary_to = 0
-        print(f"Некорректно введено число. Максимальная зарплата: 300000")
+        print("Некорректно введено число. Максимальная зарплата: 300000")
     filtered_vacancies: list = list()
     for vac in list_vac:
         if isinstance(vac, Vacancy):

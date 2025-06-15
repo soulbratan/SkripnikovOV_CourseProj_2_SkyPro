@@ -9,7 +9,7 @@ class VacancyAPI(ABC):
     @abstractmethod
     def get_vacancies(self, search_text: str) -> list[dict]:
         """Абстрактный метод для подключения и получения вакансий по ключевому слову"""
-        pass
+        pass        # pragma: no cover
 
 
 class HeadHunterAPI(VacancyAPI):
