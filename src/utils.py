@@ -1,3 +1,6 @@
+from draft_vacancies import Vacancy
+
+
 def print_enumerated_list(func):
     def wrapper(*args, **kwargs):
         # Вызываем исходную функцию
@@ -27,3 +30,25 @@ def f_by_kwrd(list_vac, kwrd):
             if word in vac.description or word in vac.title:
                 filt_list.append(vac)
     return filt_list
+
+
+def salary_range(list_vac: list[dict]) -> list[dict]:
+    try:
+        salary_from = int(input("Введите минимальную зарплату: ").replace(" ", ""))
+    except ValueError:
+        salary_from = 0
+        print(f"Некорректно введено число. Минимальная зарплата: 0")
+    try:
+        salary_to = int(input("Введите максимальную зарплату: ").replace(" ", ""))
+    except ValueError:
+        salary_to = 0
+        print(f"Некорректно введено число. Максимальная зарплата: 300000")
+    filtered_vacancies = list()
+    for vac in list_vac:
+        if isinstance(vac, Vacancy):
+            if (vac.salary.get("from", 0) >= salary_from) and (vac.salary.get("to", 0) <= salary_to):
+                filtered_vacancies.append(vac)
+        elif isinstance(vac, dict):
+            if (vac["salary"].get("from", 0) >= salary_from) and (vac["salary"].get("to", 0) <= salary_to):
+                filtered_vacancies.append(vac)
+    return filtered_vacancies
