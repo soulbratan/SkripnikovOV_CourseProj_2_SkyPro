@@ -17,3 +17,13 @@ def print_enumerated_list(func):
         return result
 
     return wrapper
+
+
+def f_by_kwrd(list_vac, kwrd):
+    """Фильтрация по ключевым словам"""
+    filt_list = list()
+    for vac in list_vac:
+        for word in kwrd:
+            if word in vac.description or word in vac.title:
+                filt_list.append(vac)
+    return filt_list
