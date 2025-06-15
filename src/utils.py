@@ -3,6 +3,7 @@ from typing import Any
 
 
 def print_enumerated_list(func: Any) -> Any:
+    """Декоратор для"""
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         # Вызываем исходную функцию
         result = func(*args, **kwargs)
