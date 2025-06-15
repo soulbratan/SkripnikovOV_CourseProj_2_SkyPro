@@ -52,3 +52,10 @@ def salary_range(list_vac: list[dict]) -> list[dict]:
             if (vac["salary"].get("from", 0) >= salary_from) and (vac["salary"].get("to", 0) <= salary_to):
                 filtered_vacancies.append(vac)
     return filtered_vacancies
+
+
+@print_enumerated_list
+def top_vacancies(list_vac, top_n=10):
+    sorted_vacancies = sorted(list_vac, reverse=True)
+    top_vacancies = sorted_vacancies[:top_n]
+    return top_vacancies
