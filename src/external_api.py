@@ -41,7 +41,7 @@ class HeadHunterAPI(VacancyAPI):
         params = {"text": search_text, "per_page": 100, "page": 0}  # Количество вакансий на странице и номер страницы
 
         try:
-            response = requests.get(self.__base_url, params=params)   # type: ignore
+            response = requests.get(self.__base_url, params=params)  # type: ignore
             response.raise_for_status()
             vacancies: list[dict] = response.json().get("items", [])
             return vacancies

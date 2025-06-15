@@ -1,8 +1,9 @@
-from draft_vacancies import Vacancy
+from src.vacancies import Vacancy
+from typing import Any
 
 
-def print_enumerated_list(func):
-    def wrapper(*args, **kwargs):
+def print_enumerated_list(func: Any) -> Any:
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         # Вызываем исходную функцию
         result = func(*args, **kwargs)
 
@@ -22,7 +23,7 @@ def print_enumerated_list(func):
     return wrapper
 
 
-def f_by_kwrd(list_vac, kwrd):
+def f_by_kwrd(list_vac: list, kwrd: str) -> list:
     """Фильтрация по ключевым словам"""
     filt_list = list()
     for vac in list_vac:
@@ -43,7 +44,7 @@ def salary_range(list_vac: list[dict]) -> list[dict]:
     except ValueError:
         salary_to = 0
         print(f"Некорректно введено число. Максимальная зарплата: 300000")
-    filtered_vacancies = list()
+    filtered_vacancies: list = list()
     for vac in list_vac:
         if isinstance(vac, Vacancy):
             if (vac.salary.get("from", 0) >= salary_from) and (vac.salary.get("to", 0) <= salary_to):
@@ -55,7 +56,7 @@ def salary_range(list_vac: list[dict]) -> list[dict]:
 
 
 @print_enumerated_list
-def top_vacancies(list_vac, top_n=10):
+def top_vacancies(list_vac: list, top_n: int = 10) -> list:
     sorted_vacancies = sorted(list_vac, reverse=True)
     top_vacancies = sorted_vacancies[:top_n]
     return top_vacancies

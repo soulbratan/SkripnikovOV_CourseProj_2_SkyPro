@@ -3,7 +3,7 @@ import os
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
-from vacancies import Vacancy   # type: ignore
+from src.vacancies import Vacancy
 
 
 class VacancyStorage(ABC):
@@ -27,7 +27,7 @@ class JSONSaver(VacancyStorage):
 
     __slots__ = ("__filename",)
 
-    def __init__(self, filename: str = "../data/vacancies.json"):
+    def __init__(self, filename: str = "vacancies.json"):
         self.__filename = filename
         if not os.path.exists(self.__filename):
             with open(self.__filename, "w", encoding="utf-8") as f:
@@ -96,7 +96,7 @@ class JSONSaver(VacancyStorage):
 
     def delete_vacancy(self, vacancy: Vacancy) -> None:
         """Удаление вакансии из файла"""
-        vacancy = vacancy.to_dict()
+        vacancy_dict: dict = vacancy.to_dict()
         with open(self.__filename, "r", encoding="utf-8") as f:
             try:
                 data = json.load(f)
@@ -107,9 +107,9 @@ class JSONSaver(VacancyStorage):
             item
             for item in data
             if not (
-                item["title"] == vacancy["title"]
-                and item["url"] == vacancy["url"]
-                and item["salary"] == vacancy["salary"]
+                item["title"] == vacancy_dict["title"]
+                and item["url"] == vacancy_dict["url"]
+                and item["salary"] == vacancy_dict["salary"]
             )
         ]
 
