@@ -140,12 +140,12 @@ def test_cast_to_object_list() -> None:
     """Тест преобразования списка словарей в список объектов Vacancy"""
     vacancies_data = [
         {
-            "name": "Python Developer",
-            "alternate_url": "https://example.com/1",
+            "title": "Python Developer",
+            "url": "https://example.com/1",
             "salary": {"from": 100000, "to": 150000, "currency": "RUR"},
-            "snippet": {"responsibility": "Разработка на Python"},
+            "description": "Разработка на Python",
         },
-        {"name": "Data Scientist", "url": "https://example.com/2", "salary": None, "snippet": {}},
+        {"title": "Data Scientist", "url": "https://example.com/2", "salary": None, "description": {}},
     ]
 
     vacancies: list = Vacancy.cast_to_object_list(vacancies_data)  # type: ignore

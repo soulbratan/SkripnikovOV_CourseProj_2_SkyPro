@@ -1,9 +1,11 @@
+from typing import Any, List, Union
+
 from src.vacancies import Vacancy
-from typing import Any
 
 
 def print_enumerated_list(func: Any) -> Any:
     """Декоратор для"""
+
     def wrapper(*args: Any, **kwargs: Any) -> Any:
         # Вызываем исходную функцию
         result = func(*args, **kwargs)
@@ -24,14 +26,55 @@ def print_enumerated_list(func: Any) -> Any:
     return wrapper
 
 
-def f_by_kwrd(list_vac: list, kwrd: str | list) -> list:
-    """Фильтрация по ключевым словам"""
-    filt_list = list()
+def f_by_kwrd(list_vac: List[Union[Vacancy, dict]], kwrd: Union[str, List[str]]) -> List[Union[Vacancy, dict]]:
+    """
+    Фильтрация вакансий по ключевым словам в названии или описании
+
+    Args:
+        list_vac: Список вакансий (объекты Vacancy или словари)
+        kwrd: Ключевое слово или список ключевых слов для поиска
+
+    Returns:
+        Отфильтрованный список вакансий, содержащих ключевые слова
+    """
+    if not list_vac or not kwrd:
+        return []
+
+    # Нормализуем входные ключевые слова
+    if isinstance(kwrd, str):
+        keywords = [kwrd.lower()]
+    else:
+        keywords = [k.lower() for k in kwrd if k]
+
+    filtered_list = []
+    seen_vacancies = set()  # Для отслеживания дубликатов
+
     for vac in list_vac:
-        for word in kwrd:
-            if word in vac.description or word in vac.title:
-                filt_list.append(vac)
-    return filt_list
+        # Для объектов Vacancy
+        if isinstance(vac, Vacancy):
+            title = vac.title.lower()
+            description = vac.description.lower()
+            vac_id = (vac.title, vac.url, str(vac.salary))
+        # Для словарей
+        elif isinstance(vac, dict):
+            title = vac.get("title", "").lower()
+            description = vac.get("description", "").lower()
+            vac_id = (vac.get("title"), vac.get("url"), str(vac.get("salary")))     # type: ignore
+        else:
+            continue
+
+        # Проверяем дубликаты
+        if vac_id in seen_vacancies:
+            continue
+
+        # Проверяем наличие хотя бы одного ключевого слова
+        for keyword in keywords:
+            if keyword in title or keyword in description:
+                filtered_list.append(vac)
+                seen_vacancies.add(vac_id)
+                break  # Не проверяем остальные ключи, если уже нашли совпадение
+
+    return filtered_list
 
 
 def salary_range(list_vac: list[dict]) -> list[dict]:

@@ -93,10 +93,9 @@ class Vacancy:
         result = []
         for vacancy in vacancies:
             salary = vacancy.get("salary")
-            title = vacancy.get("name", "Название не указано")
+            title = vacancy.get("title", "Название не указано")
             url = vacancy.get("alternate_url", vacancy.get("url", "Ссылка не указана"))
-            snippet = vacancy.get("snippet", {})
-            description = snippet.get("responsibility", "Описание не указано") or "Описание не указано"
+            description = vacancy.get("description", "Описание не указано") or "Описание не указано"
 
             result.append(
                 cls(
