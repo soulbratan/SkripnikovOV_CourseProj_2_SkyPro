@@ -24,7 +24,7 @@ def print_enumerated_list(func: Any) -> Any:
     return wrapper
 
 
-def f_by_kwrd(list_vac: list, kwrd: str) -> list:
+def f_by_kwrd(list_vac: list, kwrd: str | list) -> list:
     """Фильтрация по ключевым словам"""
     filt_list = list()
     for vac in list_vac:
@@ -62,5 +62,7 @@ def salary_range(list_vac: list[dict]) -> list[dict]:
 @print_enumerated_list
 def top_vacancies(list_vac: list, top_n: int = 10) -> list:
     sorted_vacancies = sorted(list_vac, reverse=True)
+    if not isinstance(top_n, int):
+        top_n = 10
     top_vacancies = sorted_vacancies[:top_n]
     return top_vacancies
