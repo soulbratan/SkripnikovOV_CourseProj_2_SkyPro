@@ -1,0 +1,12 @@
+[
+    {
+        "title": "Python Developer",
+        "url": "https://example.com",
+        "salary": {
+            "from": 100000,
+            "to": 150000,
+            "currency": "RUR"
+        },
+        "description": "Разработка на Python"
+    }
+]
