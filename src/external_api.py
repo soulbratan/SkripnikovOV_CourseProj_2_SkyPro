@@ -43,7 +43,7 @@ class HeadHunterAPI(VacancyAPI):
         try:
             response = requests.get(self.__base_url, params=params)  # type: ignore
             response.raise_for_status()
-            vacancies: list[dict] = response.json().get("items", [])
+            vacancies: list[dict] = response.json().get["items"]
             return vacancies
         except requests.RequestException as e:
             print(f"Ошибка при получении вакансий: {e}")

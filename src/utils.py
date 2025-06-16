@@ -1,9 +1,9 @@
-from typing import Any, List, Union
+from typing import Any, List, Union, Callable
 
 from src.vacancies import Vacancy
 
 
-def print_enumerated_list(func: Any) -> Any:
+def print_enumerated_list(func: Any) -> Callable:
     """Декоратор для"""
 
     def wrapper(*args: Any, **kwargs: Any) -> Any:
